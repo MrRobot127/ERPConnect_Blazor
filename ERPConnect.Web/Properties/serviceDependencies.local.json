@@ -2,11 +2,7 @@
   "dependencies": {
     "mssql1": {
       "type": "mssql.local",
-      "connectionId": "ConnectionStrings:AccountManagemantWebContextConnection"
-    },
-    "mssql2": {
-      "type": "mssql.local",
-      "connectionId": "ConnectionStrings:DBConnection"
+      "connectionId": "ConnectionStrings:IdentityDbContextConnection"
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
@@ -18,14 +18,15 @@
                         @* @context.User.Identity.Name *@
                     </NavLink>
                 </div>
+
             </Authorized>
-@* 
+            @*
             <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="/Identity/Account/Login" Match="NavLinkMatch.All">
-                        <span class="oi oi-lock-locked" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
+            <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Identity/Account/Login" Match="NavLinkMatch.All">
+            <span class="oi oi-lock-locked" aria-hidden="true"></span> Login
+            </NavLink>
+            </div>
             </NotAuthorized> *@
         </AuthorizeView>
     </nav>
