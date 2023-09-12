@@ -21,7 +21,6 @@ namespace ERPConnect.Web.Services
                 var responseContent = response.Content.ReadAsStringAsync().Result;
 
                 // Deserialize the JSON content into a list of CompanyGroup objects using JsonConvert
-                // Deserialize the JSON content into a list of MenuItem objects using JsonConvert
                 var apiResponse = JsonConvert.DeserializeObject<ApiResponse<List<MenuItem>>>(responseContent);
 
                 if (apiResponse.Success)
