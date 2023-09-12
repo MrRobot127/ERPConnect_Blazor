@@ -24,7 +24,15 @@ namespace ERPConnect.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            var baseAddress = new Uri("https://localhost:7165/");
+            // Get the base URL from appsettings.json
+            var baseUrl = configuration.GetValue<string>("BaseUrl");
+
+            if (string.IsNullOrEmpty(baseUrl))
+            {
+                throw new InvalidOperationException("Base URL 'BaseUrl' not found in appsettings.json.");
+            }
+
+            var baseAddress = new Uri(baseUrl);
 
             services.AddHttpClient<ICompanyGroupService, CompanyGroupService>(client =>
             {
