@@ -1,4 +1,4 @@
-﻿namespace ERPConnect.Models
+﻿namespace ERPConnect.Models.Entity_Tables
 {
     public class CompanyGroup
     {

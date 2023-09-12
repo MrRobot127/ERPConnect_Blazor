@@ -1,4 +1,4 @@
-﻿using ERPConnect.Models;
+﻿using ERPConnect.Models.Entity_Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERPConnect.Api.Models
@@ -11,6 +11,7 @@ namespace ERPConnect.Api.Models
 
         }
         public virtual DbSet<CompanyGroup> CompanyGroup { get; set; } = null!;
+        public virtual DbSet<MenuItem> MenuItem { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
