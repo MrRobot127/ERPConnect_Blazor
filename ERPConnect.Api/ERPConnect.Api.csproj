@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ERPConnect.Logging\ERPConnect.Logging.csproj" />
     <ProjectReference Include="..\ERPConnect.Models\ERPConnect.Models.csproj" />
   </ItemGroup>
 

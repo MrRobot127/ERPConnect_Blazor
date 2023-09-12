@@ -1,4 +1,4 @@
-﻿using ERPConnect.Models;
+﻿using ERPConnect.Models.Entity_Tables;
 
 namespace ERPConnect.Web.Interface
 {

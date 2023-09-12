@@ -4,7 +4,7 @@ using ERPConnect.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace ERPConnect.Api
+namespace ERPConnect.Api.Extensions
 {
     public static class ServiceCollectionExtension
     {
@@ -15,6 +15,7 @@ namespace ERPConnect.Api
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMasterEntryRepository, MasterEntryRepository>();
+            services.AddScoped<INavMenuRepository, NavigtionMenuRepository>();
         }
     }
 }

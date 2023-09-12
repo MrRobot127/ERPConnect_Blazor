@@ -1,5 +1,5 @@
 ﻿using ERPConnect.Api.Models;
-using ERPConnect.Models;
+using ERPConnect.Models.Entity_Tables;
 using ERPConnect.Web.Interface;
 using Newtonsoft.Json;
 

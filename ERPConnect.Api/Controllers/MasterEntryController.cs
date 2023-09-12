@@ -1,6 +1,6 @@
 ﻿using ERPConnect.Api.Interface;
 using ERPConnect.Api.Models;
-using ERPConnect.Models;
+using ERPConnect.Models.Entity_Tables;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERPConnect.Api.Controllers

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Models", "ERPCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Api", "ERPConnect.Api\ERPConnect.Api.csproj", "{0B556561-3648-4B8A-9756-B8A668D417C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERPConnect.Web", "ERPConnect.Web\ERPConnect.Web.csproj", "{5E7CB358-2BEE-488F-8958-815966314686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Web", "ERPConnect.Web\ERPConnect.Web.csproj", "{5E7CB358-2BEE-488F-8958-815966314686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERPConnect.Logging", "ERPConnect.Logging\ERPConnect.Logging.csproj", "{7052F896-C9E6-4D60-81AB-73696BA4E9CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5E7CB358-2BEE-488F-8958-815966314686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7CB358-2BEE-488F-8958-815966314686}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7CB358-2BEE-488F-8958-815966314686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7052F896-C9E6-4D60-81AB-73696BA4E9CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7052F896-C9E6-4D60-81AB-73696BA4E9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7052F896-C9E6-4D60-81AB-73696BA4E9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7052F896-C9E6-4D60-81AB-73696BA4E9CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

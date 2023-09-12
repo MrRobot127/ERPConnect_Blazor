@@ -1,29 +1,13 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using ERPConnect.Web.Data;
-using ERPConnect.Web.Interface;
-using ERPConnect.Web.Services;
+using ERPConnect.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("IdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDbContextConnection' not found.");
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-builder.Services.AddDbContext<IdentityDbContext>(options =>
-    options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<IdentityDbContext>();
-
-builder.Services.AddAuthentication("Identity.Application").AddCookie();
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-
-builder.Services.AddHttpClient<ICompanyGroupService, CompanyGroupService>(client =>
-{
-    client.BaseAddress = new Uri("https://localhost:7165/");
-});
+builder.Services.RegisterServices(configuration);
 
 var app = builder.Build();
 
