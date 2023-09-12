@@ -24,18 +24,17 @@ namespace ERPConnect.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
+            var baseAddress = new Uri("https://localhost:7165/");
+
             services.AddHttpClient<ICompanyGroupService, CompanyGroupService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:7165/");
+                client.BaseAddress = baseAddress;
             });
 
             services.AddHttpClient<IMenuService, MenuService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:7165/");
+                client.BaseAddress = baseAddress;
             });
-
-
-
         }
     }
 }
