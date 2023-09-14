@@ -114,9 +114,12 @@
         authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
         if (!authState.User.Identity.IsAuthenticated)
-        {            
+        {
             NavigationManager.NavigateTo("/Identity/Account/Login");
         }
-        menuList = await MenuService.GetMenuItems();
+        else
+        {
+            menuList = await MenuService.GetMenuItems();
+        }
     }
 }
