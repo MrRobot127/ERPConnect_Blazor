@@ -3,9 +3,27 @@
 
 @inject IMenuService MenuService
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
+<style>
+    .nav-link {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+    }
 
+    /* Remove bullet markers from submenus */
+    .submenu {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    /* Style for the arrow icons */
+    .submenu-arrow {
+        margin-left: 10px; /* Add some space between the text and the arrow */
+    }
+</style>
+
+<div>
+    <nav class="flex-column">
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
@@ -16,33 +34,47 @@
 
                 @if (menuList != null)
                 {
-                    foreach (var menuItem in menuList.Where(m => m.ParentMenuItemId == null)) // Top-level menu items
+                    @foreach (var menuItem in menuList.Where(m => m.ParentMenuItemId == null)) // Top-level menu items
                     {
                         <div class="nav-item px-3">
-                            <NavLink class="nav-link" href="@menuItem.Url" Match="NavLinkMatch.All">
+                            <a class="nav-link" href="javascript:void();" Match="NavLinkMatch.All" @onclick="() => ToggleSubMenu(menuItem.MenuItemId)">
                                 <span class="oi" aria-hidden="true">@menuItem.Name</span>
-                            </NavLink>
-                            @if (menuItem.InverseParentMenuItem.Any()) // Check for sub-items
+                                <span class="submenu-arrow oi" aria-hidden="true">
+                                    @if (submenuVisibility.ContainsKey(menuItem.MenuItemId) && submenuVisibility[menuItem.MenuItemId])
+                                    {
+                                        <span class="submenu-arrow oi oi-chevron-top" aria-hidden="true"></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="submenu-arrow oi oi-chevron-bottom" aria-hidden="true"></span>
+                                    }
+                                </span>
+                            </a>
+                            @if (submenuVisibility.ContainsKey(menuItem.MenuItemId) && submenuVisibility[menuItem.MenuItemId]) // Check submenu visibility
                             {
-                                @foreach (var subItem in menuItem.InverseParentMenuItem) // Second-level menu items
-                                {
-                                    <div class="nav-item px-3">
-                                        <NavLink class="nav-link" href="@subItem.Url" Match="NavLinkMatch.All">
-                                            <span class="oi" aria-hidden="true">@subItem.Name</span>
-                                        </NavLink>
-                                        @if (subItem.InverseParentMenuItem.Any())
-                                        {
-                                            @foreach (var thirdLevelItem in subItem.InverseParentMenuItem) // Third-level menu items
+                                <ul class="submenu">
+                                    @foreach (var subItem in menuList.Where(m => m.ParentMenuItemId == menuItem.MenuItemId)) // Second-level menu items
+                                    {
+                                        <li class="nav-item px-3">
+                                            <a class="nav-link" href="@subItem.Url" Match="NavLinkMatch.All">
+                                                <span class="oi" aria-hidden="true">@subItem.Name</span>
+                                            </a>
+                                            @if (submenuVisibility.ContainsKey(subItem.MenuItemId) && submenuVisibility[subItem.MenuItemId]) // Check sub-submenu visibility
                                             {
-                                                <div class="nav-item px-3">
-                                                    <NavLink class="nav-link" href="@thirdLevelItem.Url" Match="NavLinkMatch.All">
-                                                        <span class="oi" aria-hidden="true">@thirdLevelItem.Name</span>
-                                                    </NavLink>
-                                                </div>
+                                                <ul class="sub-submenu">
+                                                    @foreach (var thirdLevelItem in menuList.Where(m => m.ParentMenuItemId == subItem.MenuItemId)) // Third-level menu items
+                                                    {
+                                                        <li class="nav-item px-3">
+                                                            <a class="nav-link" href="@thirdLevelItem.Url" Match="NavLinkMatch.All">
+                                                                <span class="oi" aria-hidden="true">@thirdLevelItem.Name</span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
                                             }
-                                        }
-                                    </div>
-                                }
+                                        </li>
+                                    }
+                                </ul>
                             }
                         </div>
                     }
@@ -54,30 +86,27 @@
                         @* @context.User.Identity.Name *@
                     </NavLink>
                 </div>
-
             </Authorized>
-            @*
-            <NotAuthorized>
-            <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Identity/Account/Login" Match="NavLinkMatch.All">
-            <span class="oi oi-lock-locked" aria-hidden="true"></span> Login
-            </NavLink>
-            </div>
-            </NotAuthorized> *@
         </AuthorizeView>
     </nav>
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
     private AuthenticationState authState { get; set; }
     private IEnumerable<MenuItem> menuList;
+    private Dictionary<int, bool> submenuVisibility = new Dictionary<int, bool>();
 
-    private async Task ToggleNavMenu()
+    private async Task ToggleSubMenu(int menuItemId)
     {
-        collapseNavMenu = !collapseNavMenu;
+        if (submenuVisibility.ContainsKey(menuItemId))
+        {
+            submenuVisibility[menuItemId] = !submenuVisibility[menuItemId];
+        }
+        else
+        {
+            submenuVisibility.Add(menuItemId, true);
+        }
+        StateHasChanged();
     }
 
     protected override async Task OnInitializedAsync()
@@ -85,19 +114,9 @@
         authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
         if (!authState.User.Identity.IsAuthenticated)
-        {
-            // User is not authenticated, redirect to the login page
+        {            
             NavigationManager.NavigateTo("/Identity/Account/Login");
         }
         menuList = await MenuService.GetMenuItems();
-    }
-    protected override void OnParametersSet()
-    {
-
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-
     }
 }
