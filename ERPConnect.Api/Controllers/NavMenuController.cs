@@ -4,6 +4,7 @@ using ERPConnect.Models.Entity_Tables;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using ERPConnect.Logging;
 
 namespace ERPConnect.Api.Controllers
 {
@@ -30,6 +31,7 @@ namespace ERPConnect.Api.Controllers
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
+                Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
             }
             var jsonSerializerOptions = new JsonSerializerOptions
             {
