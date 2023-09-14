@@ -1,4 +1,5 @@
 using ERPConnect.Api.Extensions;
+using log4net.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,9 @@ var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
+
+//Configure Log4net.
+XmlConfigurator.Configure(new FileInfo("log4net.config"));
 
 //Injecting services.
 builder.Services.RegisterServices(configuration);
