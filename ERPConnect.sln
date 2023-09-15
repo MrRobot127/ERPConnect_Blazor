@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Models", "ERPConnect.Models\ERPConnect.Models.csproj", "{DC2FEAF2-41B4-4C69-A96B-0DA29C9F29B5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Api", "ERPConnect.Api\ERPConnect.Api.csproj", "{0B556561-3648-4B8A-9756-B8A668D417C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPConnect.Web", "ERPConnect.Web\ERPConnect.Web.csproj", "{5E7CB358-2BEE-488F-8958-815966314686}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC2FEAF2-41B4-4C69-A96B-0DA29C9F29B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC2FEAF2-41B4-4C69-A96B-0DA29C9F29B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC2FEAF2-41B4-4C69-A96B-0DA29C9F29B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC2FEAF2-41B4-4C69-A96B-0DA29C9F29B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B556561-3648-4B8A-9756-B8A668D417C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B556561-3648-4B8A-9756-B8A668D417C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B556561-3648-4B8A-9756-B8A668D417C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
