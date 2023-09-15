@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ERPConnect.Api\ERPConnect.Api.csproj" />
-    <ProjectReference Include="..\ERPConnect.Models\ERPConnect.Models.csproj" />
   </ItemGroup>
 
 </Project>

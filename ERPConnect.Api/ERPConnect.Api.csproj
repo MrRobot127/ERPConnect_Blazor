@@ -15,8 +15,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ERPConnect.Models\ERPConnect.Models.csproj" />
-  </ItemGroup>
-
 </Project>
