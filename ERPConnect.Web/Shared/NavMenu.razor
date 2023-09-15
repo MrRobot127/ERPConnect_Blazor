@@ -1,26 +1,4 @@
-﻿@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager NavigationManager
-
-@inject IMenuService MenuService
-
-<style>
-    .nav-link {
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    /* Remove bullet markers from submenus */
-    .submenu {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-    /* Style for the arrow icons */
-    .submenu-arrow {
-        margin-left: 10px; /* Add some space between the text and the arrow */
-    }
-</style>
+﻿@inherits NavMenuBase
 
 <div>
     <nav class="flex-column">
@@ -90,36 +68,3 @@
         </AuthorizeView>
     </nav>
 </div>
-
-@code {
-    private AuthenticationState authState { get; set; }
-    private IEnumerable<MenuItem> menuList;
-    private Dictionary<int, bool> submenuVisibility = new Dictionary<int, bool>();
-
-    private async Task ToggleSubMenu(int menuItemId)
-    {
-        if (submenuVisibility.ContainsKey(menuItemId))
-        {
-            submenuVisibility[menuItemId] = !submenuVisibility[menuItemId];
-        }
-        else
-        {
-            submenuVisibility.Add(menuItemId, true);
-        }
-        StateHasChanged();
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-        if (!authState.User.Identity.IsAuthenticated)
-        {
-            NavigationManager.NavigateTo("/Identity/Account/Login");
-        }
-        else
-        {
-            menuList = await MenuService.GetMenuItems();
-        }
-    }
-}

@@ -1,4 +1,5 @@
-﻿using ERPConnect.Logging;
+﻿
+using ERPConnect.Api.Models;
 
 namespace ERPConnect.Api.Middlewares
 {

@@ -1,7 +1,7 @@
 ﻿using log4net;
 using System.Reflection;
 
-namespace ERPConnect.Logging
+namespace ERPConnect.Api.Models
 {
     public sealed class Logger
     {
