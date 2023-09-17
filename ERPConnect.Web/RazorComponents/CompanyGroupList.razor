@@ -75,23 +75,23 @@
             if (args.Action == "Add")
             {
                 await CompanyGroupService.AddCompanyGroup(args.Data);
-                // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-                // CompanyGroupGrid.Refresh();
+                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                CompanyGroupGrid.Refresh();
             }
             else
             {
                 await CompanyGroupService.UpdateCompanyGroup(args.Data);
-                // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-                // CompanyGroupGrid.Refresh();
+                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                CompanyGroupGrid.Refresh();
             }
         }
         else if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
         {
             await CompanyGroupService.DeleteCompanyGroup(args.Data.Id);
-            // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-            // CompanyGroupGrid.Refresh();
+            CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+            CompanyGroupGrid.Refresh();
         }
-        StateHasChanged();
+        // StateHasChanged();
     }
 
 

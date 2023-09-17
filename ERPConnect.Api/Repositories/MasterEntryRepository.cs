@@ -36,7 +36,6 @@ namespace ERPConnect.Api.Repositories
                 if (existingGroup != null)
                 {
                     existingGroup.GroupName = updatedCompanyGroup.GroupName;
-                    existingGroup.IsActive = updatedCompanyGroup.IsActive;
 
                     existingGroup.ModifiedBy = 1; //will change once User Functionality added
                     existingGroup.ModifiedOn = DateTime.Now;
