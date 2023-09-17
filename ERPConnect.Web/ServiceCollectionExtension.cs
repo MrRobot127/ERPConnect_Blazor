@@ -22,7 +22,9 @@ namespace ERPConnect.Web
             services.AddAuthentication("Identity.Application").AddCookie();
 
             services.AddSyncfusionBlazor();
-           
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZfdXVQR2JZUEZ/VkM=");
+
+
             // Add services to the container.
             services.AddRazorPages();
             services.AddServerSideBlazor();

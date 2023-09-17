@@ -10,7 +10,6 @@ var configuration = new ConfigurationBuilder()
 builder.Services.RegisterServices(configuration);
 
 var app = builder.Build();
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZfdXVQR2JZUEZ/VkM=");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
