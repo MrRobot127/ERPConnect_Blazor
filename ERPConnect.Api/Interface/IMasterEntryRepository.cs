@@ -4,6 +4,10 @@ namespace ERPConnect.Api.Interface
 {
     public interface IMasterEntryRepository
     {
-        Task<List<CompanyGroup>> GetCompanyGroup();
+        Task<IEnumerable<CompanyGroup>> GetCompanyGroup();
+        Task<CompanyGroup> UpdateCompanyGroup(CompanyGroup updatedCompanyGroup);
+        Task<CompanyGroup> AddCompanyGroup(CompanyGroup newcompanyGroup);
+        Task<CompanyGroup> GetCompanyGroupById(int id);
+        Task DeleteCompanyGroup(int id);
     }
 }

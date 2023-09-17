@@ -30,7 +30,7 @@ namespace ERPConnect.Api.Controllers
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
-                Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
+                //Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
             }
             var jsonSerializerOptions = new JsonSerializerOptions
             {

@@ -1,78 +1,71 @@
 ﻿@page "/CompanyGroup"
-
-@inherits CompanyGroupListBase
-
-
-
-<style>
-    .custom-table {
-        width: 100%;
-        border-collapse: collapse !important;
-        border: 1px solid #ccc;
-    }
-
-    .editable-highlight {
-        background-color: #f3f3f3;
-    }
-
-    .custom-table button {
-        border: none;
-        background: transparent;
-    }
-
-    .custom-table th, .custom-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
-
-</style>
+@using System.Net;
+@using Syncfusion.Blazor.Grids
 
 
-<table id="company-group-table" class="custom-table">
-    <thead>
-        <tr>
-            <th>Code</th>
-            <th>GroupName</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var group in CompanyGroups)
+<div>
+    <SfGrid  TValue="CompanyGroup"
+            DataSource="@CompanyGroups"
+            AllowPaging="true"
+            AllowSorting="true"
+            Toolbar="@(new List<string>(){"Add","Edit","Delete","Cancel","Update"})">
+        <GridEvents OnActionBegin="ActionBeginHandler" TValue="CompanyGroup"></GridEvents>
+        <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
+
+        <GridPageSettings PageSize="10"></GridPageSettings>
+        <GridColumns>
+            <GridColumn Field="@nameof(CompanyGroup.Id)" HeaderText="Group Code"></GridColumn>
+            <GridColumn Field="@nameof(CompanyGroup.GroupName)" HeaderText="Group Name"></GridColumn>
+        </GridColumns>
+    </SfGrid>
+</div>
+
+
+@code
+{
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    public ICompanyGroupService CompanyGroupService { get; set; }
+
+    public List<CompanyGroup> CompanyGroups { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = authenticationStateTask.Result;
+
+        if (!authenticationState.User.Identity.IsAuthenticated)
         {
-            <tr class="company-group-row">
-                <td class="group-id">@group.Id</td>
-                <td class="group-name" data-group-id="@group.Id">@group.GroupName</td>
-                <td>
-                    <button class="edit-button" data-id="@group.Id">
-                        <img src="/images/edit-icon.png" title="Edit" style="height: 17px; width: 18px; border: none;" />
-                    </button>
-
-
-                    <button class="delete-button" data-id="@group.Id">
-                        <img src="/images/delete-icon.png" title="Delete" style="height: 17px; width: 18px; border: none;" />
-                    </button>
-                    <button class="save-button" data-id="@group.Id" style="display:none;">
-                        <img src="/images/save-icon.png" title="Save" style="height: 17px; width: 18px; border: none;" />
-                    </button>
-                    <button class="cancel-button" data-id="@group.Id" style="display:none;">
-                        <img src="/images/cancel-icon.jpg" title="Cancel" style="height: 25px; width: 26px; border: none;" />
-                    </button>
-                </td>
-            </tr>
+            string returnUrl = WebUtility.UrlEncode($"/MasterEntry/CompanyGroup");
+            NavigationManager.NavigateTo($"/Identity/Account/Login?returnUrl={returnUrl}");
         }
-    </tbody>
-    <tfoot>
-        <tr class="company-group-row">
-            <td></td>
-            <td>
-                <input type="text" class="form-control" id="new-group-name" placeholder="New Group Name" />
-            </td>
-            <td>
-                <button class="add-new-button">
-                    <img src="/images/add-icon.png" title="Add New" style="height: 17px; width: 18px; border: none;" />
-                </button>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+        var user = authenticationState.User;
+
+        CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+    }
+
+    public async void ActionBeginHandler(ActionEventArgs<CompanyGroup> args)
+    {
+        if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Save))
+        {
+            if (args.Action == "Add")
+            {
+                await CompanyGroupService.AddCompanyGroup(args.Data);
+                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                // Grid.Refresh();
+            }
+            else
+            {
+                await CompanyGroupService.UpdateCompanyGroup(args.Data);
+            }
+        }
+        if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
+        {
+            await CompanyGroupService.DeleteCompanyGroup(args.Data.Id);
+        }
+    }
+}

@@ -23,7 +23,6 @@ namespace ERPConnect.Web.Shared
 
             if (!authState.User.Identity.IsAuthenticated)
             {
-                //return LocalRedirect("~/Identity/Account/Login");
                 NavigationManager.NavigateTo("/Identity/Account/Login");
             }
             else

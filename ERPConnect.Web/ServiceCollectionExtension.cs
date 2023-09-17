@@ -3,6 +3,7 @@ using ERPConnect.Web.Interface;
 using ERPConnect.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.Blazor;
 
 namespace ERPConnect.Web
 {
@@ -20,6 +21,8 @@ namespace ERPConnect.Web
 
             services.AddAuthentication("Identity.Application").AddCookie();
 
+            services.AddSyncfusionBlazor();
+           
             // Add services to the container.
             services.AddRazorPages();
             services.AddServerSideBlazor();
