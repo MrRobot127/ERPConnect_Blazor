@@ -4,7 +4,7 @@
 
 
 <div>
-    <SfGrid  TValue="CompanyGroup"
+    <SfGrid @ref="CompanyGroupGrid" TValue="CompanyGroup"
             DataSource="@CompanyGroups"
             AllowPaging="true"
             AllowSorting="true"
@@ -23,6 +23,8 @@
 
 @code
 {
+    SfGrid<CompanyGroup> CompanyGroupGrid { get; set; }
+
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
 
@@ -56,16 +58,21 @@
             {
                 await CompanyGroupService.AddCompanyGroup(args.Data);
                 CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-                // Grid.Refresh();
+                CompanyGroupGrid.Refresh();
             }
             else
             {
                 await CompanyGroupService.UpdateCompanyGroup(args.Data);
+                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                CompanyGroupGrid.Refresh();
             }
         }
         if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
         {
             await CompanyGroupService.DeleteCompanyGroup(args.Data.Id);
+            CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+            CompanyGroupGrid.Refresh();
         }
+        StateHasChanged();
     }
 }
