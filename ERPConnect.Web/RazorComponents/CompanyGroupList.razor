@@ -1,21 +1,39 @@
 ﻿@page "/CompanyGroup"
 @using System.Net;
+@using Microsoft.CodeAnalysis;
 @using Syncfusion.Blazor.Grids
+@using System.Reflection.Metadata;
 
 
 <div>
-    <SfGrid @ref="CompanyGroupGrid" TValue="CompanyGroup"
+    <SfGrid @ref="CompanyGroupGrid"
+            TValue="CompanyGroup"
             DataSource="@CompanyGroups"
             AllowPaging="true"
             AllowSorting="true"
+            AllowFiltering="true"
             Toolbar="@(new List<string>(){"Add","Edit","Delete","Cancel","Update"})">
+
         <GridEvents OnActionBegin="ActionBeginHandler" TValue="CompanyGroup"></GridEvents>
         <GridEditSettings AllowAdding="true" AllowEditing="true" AllowDeleting="true"></GridEditSettings>
 
         <GridPageSettings PageSize="10"></GridPageSettings>
         <GridColumns>
-            <GridColumn Field="@nameof(CompanyGroup.Id)" HeaderText="Group Code"></GridColumn>
-            <GridColumn Field="@nameof(CompanyGroup.GroupName)" HeaderText="Group Name"></GridColumn>
+
+            <GridColumn Field="@nameof(CompanyGroup.Id)">
+                <HeaderTemplate>
+                    <span style="font-weight: bold">Group Code</span>
+                </HeaderTemplate>
+            </GridColumn>
+
+            <GridColumn Field="@nameof(CompanyGroup.GroupName)">
+                <HeaderTemplate>
+                    <span style="font-weight: bold">Group Name</span>
+                </HeaderTemplate>
+            </GridColumn>
+
+
+
         </GridColumns>
     </SfGrid>
 </div>
@@ -57,22 +75,24 @@
             if (args.Action == "Add")
             {
                 await CompanyGroupService.AddCompanyGroup(args.Data);
-                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-                CompanyGroupGrid.Refresh();
+                // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                // CompanyGroupGrid.Refresh();
             }
             else
             {
                 await CompanyGroupService.UpdateCompanyGroup(args.Data);
-                CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-                CompanyGroupGrid.Refresh();
+                // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+                // CompanyGroupGrid.Refresh();
             }
         }
         else if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
         {
             await CompanyGroupService.DeleteCompanyGroup(args.Data.Id);
-            CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
-            CompanyGroupGrid.Refresh();
+            // CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
+            // CompanyGroupGrid.Refresh();
         }
         StateHasChanged();
     }
+
+
 }
