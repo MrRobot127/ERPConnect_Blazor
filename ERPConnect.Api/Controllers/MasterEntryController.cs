@@ -29,6 +29,7 @@ namespace ERPConnect.Api.Controllers
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
+                Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
             }
             return apiResponse;
         }
@@ -50,6 +51,7 @@ namespace ERPConnect.Api.Controllers
                 {
                     apiResponse.Success = false;
                     apiResponse.Message = ex.Message;
+                    Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
                 }
             }
             else
@@ -82,6 +84,7 @@ namespace ERPConnect.Api.Controllers
                 {
                     apiResponse.Success = false;
                     apiResponse.Message = ex.Message;
+                    Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
                 }
             }
             else
@@ -123,6 +126,7 @@ namespace ERPConnect.Api.Controllers
             {
                 apiResponse.Success = false;
                 apiResponse.Message = ex.Message;
+                Logger.Instance.Error($"Exception Occured at {DateTime.Now}.Exception Details: {ex.Message}");
             }
             return Ok(apiResponse);
         }
