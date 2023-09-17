@@ -67,7 +67,7 @@
                 CompanyGroupGrid.Refresh();
             }
         }
-        if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
+        else if (args.RequestType.Equals(Syncfusion.Blazor.Grids.Action.Delete))
         {
             await CompanyGroupService.DeleteCompanyGroup(args.Data.Id);
             CompanyGroups = (await CompanyGroupService.GetCompanyGroup()).ToList();
