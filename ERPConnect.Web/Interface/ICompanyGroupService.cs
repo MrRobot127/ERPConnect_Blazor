@@ -4,6 +4,10 @@ namespace ERPConnect.Web.Interface
 {
     public interface ICompanyGroupService
     {
-        IEnumerable<CompanyGroup> GetCompanyGroup();
+        Task<IEnumerable<CompanyGroup>> GetCompanyGroup();
+        Task<CompanyGroup> UpdateCompanyGroup(CompanyGroup updatedCompanyGroup);
+        Task<CompanyGroup> AddCompanyGroup(CompanyGroup newcompanyGroup);
+        Task DeleteCompanyGroup(int id);
+
     }
 }

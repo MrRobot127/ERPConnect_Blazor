@@ -3,6 +3,7 @@ using ERPConnect.Web.Interface;
 using ERPConnect.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.Blazor;
 
 namespace ERPConnect.Web
 {
@@ -19,6 +20,10 @@ namespace ERPConnect.Web
                 .AddEntityFrameworkStores<IdentityDbContext>();
 
             services.AddAuthentication("Identity.Application").AddCookie();
+
+            services.AddSyncfusionBlazor();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZfdXVQR2JZUEZ/VkM=");
+
 
             // Add services to the container.
             services.AddRazorPages();

@@ -16,7 +16,7 @@
                     {
                         <div class="nav-item px-3">
                             <a class="nav-link" href="javascript:void();" Match="NavLinkMatch.All" @onclick="() => ToggleSubMenu(menuItem.MenuItemId)">
-                                <span class="oi" aria-hidden="true">@menuItem.Name</span>
+                                <span class="oi oi-list-rich" aria-hidden="true"></span>@menuItem.Name
                                 <span class="submenu-arrow oi" aria-hidden="true">
                                     @if (submenuVisibility.ContainsKey(menuItem.MenuItemId) && submenuVisibility[menuItem.MenuItemId])
                                     {
